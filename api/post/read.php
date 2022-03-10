@@ -41,4 +41,5 @@
         }
 
         // Turn to JSON
+        echo json_encode($posts_arr);
     }

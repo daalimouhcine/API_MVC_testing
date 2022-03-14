@@ -1,23 +1,20 @@
 <?php
-    
-    class Database {
+
+    class Database{
         private $host = 'localhost';
-        private $dbname = 'api_test';
+        private $dbName = 'myblog';
         private $root = 'root';
         private $password = '';
-        private $conn;
 
-        // DB connect
-        public function connect() {
-            $this->conn = null;
+        public $conn;
 
+        public function __construct() {
             try {
-                $this->conn = new PDO("mysql:host=$this->host;dbname=$this->dbname", $this->root, $this->password);
+                $this->conn = new PDO("mysql:host=$this->host;dbname=$this->dbName", $this->root, $this->password);
                 $this->conn->getAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+                return $this->conn;
             } catch(PDOException $e) {
-                echo 'Connect Error: ' . $e->getMessage(); 
+                echo 'Connection Error: ' . $e->getMessage();
             }
-            return $this->conn;
         }
     }

@@ -1,38 +1,20 @@
 <?php
+    require_once '../config/Database.php';
 
     class Post {
-        // DB stuff
-        private $conn;
-        private $table = 'posts';
 
-        // Post Proprieties
-        public $id;
-        public $category_id;
-        public $category_name;
-        public $title;
-        public $body;
-        public $author;
-        public $created_at;
-
-
-        // Constructor with DB
-        public function __construct($db) {
-            $this->conn = $db;
+        public function __construct() {
+            $this->db = new Database;
         }
 
-        // Get Posts
-        public function read() {
-            // Create query
-            $query = "SELECT categories.*, posts.* FROM $this->table INNER JOIN categories ON posts.category_id = category.id";
 
-            // Prepare query
-            $stmt = $this->conn->prepare($query);
+        public function readPosts() {
+            $query = $this->db->prepare('SELECT * FROM posts');
+            $stmt = $query->execute();
+            $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            // Execute query
-            $stmt->execute();
-
-            return $stmt;
-
+            return $posts;
         }
+
 
     }

@@ -9,9 +9,8 @@
 
 
         public function readPosts() {
-            $query = $this->db->prepare('SELECT * FROM posts');
-            $stmt = $query->execute();
-            $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $this->db->query('SELECT * FROM posts');
+            $posts = $this->db->resultSet();
 
             return $posts;
         }

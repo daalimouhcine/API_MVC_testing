@@ -7,7 +7,7 @@
     */
 
     class Core{
-        private $currentApi = 'posts';
+        private $currentApi = 'Posts';
         private $currentMethod = 'read';
         private $params = [];
 
@@ -52,6 +52,7 @@
         }
 
         public function getUrl() {
+            echo $_GET['url'];
             if(isset($_GET['url'])) {
                 $url = $_GET['url'];
                 $url = rtrim($url, '/');
